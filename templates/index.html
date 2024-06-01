@@ -7,38 +7,38 @@
 </head>
 <body>
     <nav class="navbar">
-        <h1>What Song Is This?</h1>
+        <h1>Lời này bài gì?</h1>
     </nav>
     <div class="main-content">
         <div class="content">
             <section id="searchSection" class="section">
-                <h2>Search Song</h2>
+                <h2>Tìm bài hát</h2>
                 <form id="textForm">
                     <div class="form-group">
-                        <label for="inputText">Text:</label>
+                        <label for="inputText">Lời muốn tìm</label>
                         <input type="text" id="inputText" name="text" required>
                     </div>
-                    <input type="submit" value="Process">
+                    <input type="submit" value="Tìm kiếm">
                 </form>
                 <div id="textResponse" class="response"></div>
             </section>
 
             <section id="uploadSection" class="section">
-                <h2>Upload Audio File</h2>
+                <h2>Thêm bài muốn tìm</h2>
                 <form id="uploadForm" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="artist">Artist:</label>
+                        <label for="artist">Nghệ sĩ sáng tác</label>
                         <input type="text" id="artist" name="artist" required>
                     </div>
                     <div class="form-group">
-                        <label for="song_name">Song name:</label>
+                        <label for="song_name">Tên bài hát</label>
                         <input type="text" id="song_name" name="song_name" required>
                     </div>
                     <div class="form-group">
-                        <label for="file">Audio File (mp3 or wav):</label>
+                        <label for="file">Định dạng(mp3 or wav):</label>
                         <input type="file" id="file" name="file" accept=".mp3, .wav" required>
                     </div>
-                    <input type="submit" value="Upload">
+                    <input type="submit" value="Tải lên">
                 </form>
                 <div id="uploadResponse" class="response"></div>
             </section>
