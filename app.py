@@ -7,6 +7,7 @@ from flask import Flask, redirect, render_template, request, session
 from flask_socketio import SocketIO, send, emit, join_room, leave_room
 # from scipy.io.wavfile import write as write_wav
 from loguru import logger
+# from infer.viet_asr import VietASR
 
 from infer import VietASR
 
