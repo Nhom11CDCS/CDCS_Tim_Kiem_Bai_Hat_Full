@@ -88,7 +88,7 @@ input[type="file"] {
 
 
 input[type="submit"] {
-    background-color: #1e90ff;
+    background-color: #91046F;
     color: #ffffff;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -96,7 +96,7 @@ input[type="submit"] {
 
 
 input[type="submit"]:hover {
-    background-color: #3742fa;
+    background-color: #91046F;
 }
 
 

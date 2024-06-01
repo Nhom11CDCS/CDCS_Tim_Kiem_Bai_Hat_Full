@@ -12,7 +12,7 @@ In this project, we used Flask for the front-end and Elastic for the database. M
 ```bash
 apt-get update && apt-get install -y libsndfile1 ffmpeg
 ```
-+ Install [recommend python>=3.8](https://www.python.org/downloads/release/python-385/)
++ Install recommend [python>=3.8](https://www.python.org/downloads/release/python-385/)
 * Python libs:
 ```bash
 pip install -r requirements.txt
