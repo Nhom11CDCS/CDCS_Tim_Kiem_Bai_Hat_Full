@@ -1,20 +1,18 @@
-# VietASR (Vietnamese Automatic Speech Recognition)
-------
-⚡ Some experiment with [NeMo](https://github.com/NVIDIA/NeMo) ⚡  
+# **Lời này bài gì?**(Finding songs through lyrics) :musical_note: 
 
-Model: [QuartzNet](https://docs.nvidia.com/deeplearning/nemo/user-guide/docs/en/main/asr/models.html#quartznet) is a smaller version of [Jaser](https://docs.nvidia.com/deeplearning/nemo/user-guide/docs/en/main/asr/models.html#jasper)  model  
+## Description :memo:
+A web application can be used to find songs by typing in the lyrics.
 
-The pretrained model on this repo was trained with ~100 hours Vietnamese speech dataset, was collected from youtube, radio, call center(8k), text to speech data and some public dataset (vlsp, vivos, fpt). It is very small model (13M parameters) make it inference so fast ⚡  
+In this project, we used Flask for the front-end and Elastic for the database. Moreover, we had tried to take the advantage of the Quartznet module to build a simple AI. This artifical intelligence can convert speeches to texts from input files. In addition, we trained this AI to be the most suitable for Vietnamese.
 
-🌱 _Update: The new version available on [`branch v2.0`](https://github.com/dangvansam/viet-asr/tree/v2.0) is built from scratch with PyTorch_
 
-Installation
-------------
+## Installation :gear:
+**1. Install the Quartznet**: :robot: 
 + Update & install linux libs:
 ```bash
 apt-get update && apt-get install -y libsndfile1 ffmpeg
 ```
-+ Install [python>=3.8](https://www.python.org/downloads/release/python-385/)
++ Install [recommend python>=3.8](https://www.python.org/downloads/release/python-385/)
 * Python libs:
 ```bash
 pip install -r requirements.txt
@@ -28,53 +26,63 @@ pip install torch==1.8.1+cpu torchvision==0.9.1+cpu torchaudio==0.8.1 -f https:/
 ```bash
 pip install https://github.com/kpu/kenlm/archive/master.zip
 ```
-Transcribe audio file
---------
-```bash
-python infer.py audio_samples # will transcribe audio file in folder: audio_samples
+
+**2. Install elasticSearch & kibana** :chart_with_downwards_trend:  
+  2.1 ElasticSearch 
+You can see the installation [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/deb.html)
+Or following these commands: 
++ Get the elastic key: 
 ```
-Run web application
---------
-* Run app:
-```bash
-python app.py # app will run on address: https://localhost:5000
+wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
 ```
-[![App](demo.JPG)]()  
-
-* Video demo on Youtube:
-   + v1: https://youtu.be/P3mhEngL1us  
-   + v2: https://youtu.be/o9NpWi3VUHs  
-
-[![Video demo](https://img.youtube.com/vi/P3mhEngL1us/maxresdefault.jpg)](https://youtu.be/P3mhEngL1us)  
-
-<!-- * English Model ([pretrained](model_english)) -->
-
-TODO
-------
-* Conformer Model
-* Data augumentation: speed, noise, pitch shift, time shift,...  
-* FastAPI
-* Add Dockerfile
-
-Citation
---------
++ Install transport https: 
 ```
-  @article{kuchaiev2019nemo,
-    title={Nemo: a toolkit for building ai applications using neural modules},
-    author={Kuchaiev, Oleksii and Li, Jason and Nguyen, Huyen and Hrinchuk, Oleksii and Leary, Ryan and Ginsburg, Boris and Kriman, Samuel and Beliaev, Stanislav and Lavrukhin, Vitaly and Cook, Jack and others},
-    journal={arXiv preprint arXiv:1909.09577},
-    year={2019}
-  }
+sudo apt-get install apt-transport-http
+```
++ Install from the APT repository: 
+``` 
+echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://artifacts.elastic.co/packages/8.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-8.x.list
+``` 
++ Install elasticSearch: 
+```
+sudo apt-get update && sudo apt-get install elasticsearch
+```
++ Let the elastich start up with your computer: 
+```
+sudo /bin/systemctl daemon-reload
+
+sudo /bin/systemctl enable elasticsearch.service
+
+sudo systemctl start elasticsearch.service
+```  
+2.2 Kibana  
+You can see the installation [here](https://www.elastic.co/guide/en/kibana/8.13/deb.html#deb-repo)
+Or follow these commands:
++ Get the Kibana key: 
+```
+wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
 ```
 
-- Install elasticsearch
-  - wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
-  - sudo apt-get install apt-transport-https
-  - echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://artifacts.elastic.co/packages/8.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-8.x.list
-  - sudo apt-get update && sudo apt-get install elasticsearch
-  - sudo /bin/systemctl daemon-reload
-  - sudo /bin/systemctl enable elasticsearch.service
-  - sudo systemctl start elasticsearch.service
-- edit /etc/elasticsearch/elasticsearch.yml
-  - xpack.security.enabled: false
-  - xpack.security.enrollment.enabled: false
++ Install from the APT repository: 
+```
+echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://artifacts.elastic.co/packages/8.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-8.x.list
+```
++ Install Kibana
+``` 
+sudo apt-get update && sudo apt-get install kibana
+```
++ Let the kibana start up with your computer: 
+``` 
+sudo /bin/systemctl daemon-reload
+sudo /bin/systemctl enable kibana.service
+sudo systemctl start kibana.service 
+```
+**3. Install Flask**   
+Use this command: 
+```
+sudo pip install Flask
+```
+or 
+```
+sudo pip3 install Flask 
+``` 
