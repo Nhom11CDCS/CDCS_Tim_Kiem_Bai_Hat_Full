@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Lời này bài gì?</title>
     <link rel="stylesheet" href="../static/css/style.css">
     <link rel="icon" type="image/png" href="../static/css/magnifying-glass.png">
 </head>
+
 <body>
     <nav class="navbar">
         <h1>Lời này bài gì?</h1>
@@ -21,7 +23,7 @@
                     </div>
                     <input type="submit" value="Tìm kiếm">
                 </form>
-                <div id="textResponse" class="response"></div>
+                <div id="textResponse" class="response scrollable"></div>
             </section>
 
             <section id="uploadSection" class="section">
@@ -41,13 +43,13 @@
                     </div>
                     <input type="submit" value="Tải lên">
                 </form>
-                <div id="uploadResponse" class="response"></div>
+                <div id="uploadResponse" class="response scrollable"></div>
             </section>
         </div>
     </div>
 
     <script>
-        document.getElementById('uploadForm').onsubmit = async function(event) {
+        document.getElementById('uploadForm').onsubmit = async function (event) {
             event.preventDefault();
             const formData = new FormData(this);
             try {
@@ -56,13 +58,29 @@
                     body: formData
                 });
                 const result = await response.json();
-                document.getElementById('uploadResponse').innerText = JSON.stringify(result, null, 2);
+                const uploadResponse = document.getElementById('uploadResponse');
+                uploadResponse.innerHTML = ''; // Clear previous results
+
+                // Ensure result is an array
+                const songs = Array.isArray(result) ? result : [result];
+
+                // Iterate over the songs and create HTML elements for each song
+                songs.forEach(song => {
+                    const songElement = document.createElement('div');
+                    songElement.className = 'song';
+                    songElement.innerHTML = `
+                <h3>${song.artist}</h3>
+                <p><strong>Bài hát:</strong> ${song.song_name}</p>
+                <p><strong>Lời bài hát:</strong> ${song.lyrics}</p>
+            `;
+                    uploadResponse.appendChild(songElement);
+                });
             } catch (error) {
                 document.getElementById('uploadResponse').innerText = 'Error: ' + error;
             }
         }
 
-        document.getElementById('textForm').onsubmit = async function(event) {
+        document.getElementById('textForm').onsubmit = async function (event) {
             event.preventDefault();
             const inputText = document.getElementById('inputText').value;
             try {
@@ -74,11 +92,29 @@
                     body: JSON.stringify({ text: inputText })
                 });
                 const result = await response.json();
-                document.getElementById('textResponse').innerText = JSON.stringify(result, null, 2);
+                const textResponse = document.getElementById('textResponse');
+                textResponse.innerHTML = ''; // Clear previous results
+
+                // Ensure result is an array
+                const songs = Array.isArray(result) ? result : [result];
+
+                // Iterate over the result and create HTML elements for each song
+                songs.forEach((song, index) => {
+                    const songElement = document.createElement('div');
+                    songElement.className = 'song';
+                    songElement.innerHTML = `
+                <h3>${index + 1}. ${song.artist}</h3>
+                <p><strong>Bài hát:</strong> ${song.song_name}</p>
+                <p><strong>Lời bài hát:</strong> ${song.lyrics}</p>
+            `;
+                    textResponse.appendChild(songElement);
+                });
             } catch (error) {
                 document.getElementById('textResponse').innerText = 'Error: ' + error;
             }
         }
+
     </script>
 </body>
+
 </html>

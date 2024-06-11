@@ -1,16 +1,17 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 /* Background styling */
 body {
     font-family: Arial, sans-serif;
-    background: url('https://st4.depositphotos.com/7699512/26360/i/450/depositphotos_263601152-stock-photo-retrowave-sunset-perspective-grid-futuristic.jpg') no-repeat center center fixed;
+    background: url('./background.jpeg') no-repeat center center fixed;
     background-size: cover;
+    object-fit: cover;
     color: #ffffff;
 }
-
 
 /* Navbar styling */
 .navbar {
@@ -22,6 +23,10 @@ body {
     align-items: center;
     font-size: 24px;
     color: #ffffff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
 }
 
 /* Main content styling */
@@ -29,7 +34,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    padding-top: 110px; /* Thêm khoảng cách để đảm bảo phần form cách header 10px */
 }
 
 .content {
@@ -38,19 +44,11 @@ body {
     padding: 20px;
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0.8);
-}
- 
-.section {
-    margin-bottom: 40px;
+    position: relative;
 }
 
-
-/* Section styling */
 .section {
-    /* background-color: rgba(0, 0, 0, 0.8); */
-    padding: 20px;
-    border-radius: 10px;
-    margin: 10px;
+    margin-bottom: 20px;
 }
 
 /* Form and input styling */
@@ -59,7 +57,6 @@ form {
     flex-direction: column;
 }
 
-
 .form-group {
     display: flex;
     flex-direction: column;
@@ -67,7 +64,6 @@ form {
     gap: 8px;
     text-align: left;
 }
-
 
 input[type="text"],
 input[type="file"],
@@ -78,14 +74,12 @@ input[type="submit"] {
     font-size: 16px;
 }
 
-
 /* Input fields */
 input[type="text"],
 input[type="file"] {
     background-color: rgba(255, 255, 255, 0.7);
     color: #000;
 }
-
 
 input[type="submit"] {
     background-color: #91046F;
@@ -94,11 +88,9 @@ input[type="submit"] {
     transition: background-color 0.3s ease;
 }
 
-
 input[type="submit"]:hover {
     background-color: #91046F;
 }
-
 
 /* Response styling */
 .response {
@@ -107,4 +99,30 @@ input[type="submit"]:hover {
     background-color: rgba(255, 255, 255, 0.1);
     padding: 10px;
     border-radius: 5px;
+}
+
+/* Scrollable content */
+.scrollable {
+    max-height: 250px; /* Tăng chiều cao */
+    overflow-y: auto;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    margin-top: 10px;
+}
+
+/* Song styling */
+.song {
+    margin-bottom: 10px; /* Thu nhỏ khoảng cách giữa các phần tử */
+}
+
+.song h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #ffcc00;
+}
+
+.song p {
+    margin: 2px 0; /* Thu nhỏ khoảng cách giữa artist, song name và lyrics */
+    color: #ffffff;
 }
